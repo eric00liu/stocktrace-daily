@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>投资情报日报 · 2026-07-19</title>
+<style>
+  :root { --bg:#f4f5f2; --paper:#fff; --ink:#18201d; --muted:#78827d; --line:#dde2dd;
+    --green:#087f5b; --red:#c92a2a; --amber:#b86700; --blue:#3567a8; }
+  * { box-sizing:border-box; }
+  body { margin:0; color:var(--ink); background:var(--bg); font:14px/1.55 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif; }
+  .page { max-width:1120px; margin:auto; padding:32px 22px 72px; }
+  h1,h2,h3,p { margin-top:0; } h1 { max-width:900px; margin-bottom:10px; font-size:32px; line-height:1.22; letter-spacing:-.02em; }
+  h2 { margin:0 0 12px; font-size:18px; } h3 { margin:4px 0 8px; font-size:15px; }
+  section { margin-top:30px; }
+  .topline { display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-bottom:12px; color:var(--muted); font-size:12px; }
+  .status { padding:4px 9px; border-radius:99px; font-weight:700; }
+  .status.pass { color:var(--green); background:#e6f5ef; } .status.warning { color:var(--amber); background:#fff1d9; }
+  .status.error { color:var(--red); background:#ffe8e8; }
+  .lead { max-width:920px; margin-bottom:18px; color:#4b5651; font-size:16px; }
+  .health-strip { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:8px; }
+  .health-item { display:flex; gap:9px; padding:10px 12px; border:1px solid var(--line); border-radius:10px; background:rgba(255,255,255,.75); }
+  .health-item small { display:block; color:var(--muted); } .health-icon { width:20px; height:20px; border-radius:50%; text-align:center; font-weight:800; }
+  .health-item.pass .health-icon { color:var(--green); background:#e6f5ef; } .health-item.warning .health-icon { color:var(--amber); background:#fff1d9; }
+  .health-item.error .health-icon { color:var(--red); background:#ffe8e8; }
+  .metrics { display:grid; grid-template-columns:repeat(6,1fr); gap:8px; }
+  .metric,.stat { padding:12px; border:1px solid var(--line); border-radius:10px; background:var(--paper); text-align:center; }
+  .metric b,.stat b { display:block; font-size:23px; line-height:1.2; } .metric span,.stat span { color:var(--muted); font-size:11px; }
+  .note { margin:8px 0 0; color:var(--muted); font-size:12px; }
+  .grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+  .grid.three { grid-template-columns:repeat(3,minmax(0,1fr)); }
+  .change-card,.decision-card,.card,.theme-card,.tension-card { padding:15px 16px; border:1px solid var(--line); border-radius:12px; background:var(--paper); }
+  .change-card { border-left:4px solid var(--blue); } .change-card.risk { border-left-color:var(--red); } .change-card.divergence { border-left-color:var(--amber); }
+  .decision-card { border-color:#d8c59e; background:#fffdf7; } .action { margin-top:10px; padding:9px 11px; border-radius:8px; background:#f7f1e4; } .action b { margin-right:8px; }
+  .opportunity { border-top:3px solid var(--green); } .risk-card { border-top:3px solid var(--red); }
+  .eyebrow { color:var(--muted); font-size:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; }
+  .priority { margin-right:7px; padding:2px 6px; border-radius:99px; } .priority.high { color:var(--red); background:#ffe8e8; }
+  .priority.medium { color:var(--amber); background:#fff1d9; } .priority.low { color:var(--muted); background:#eef0ee; }
+  .ticker,.mono { color:var(--muted); font:12px ui-monospace,"SF Mono",Menlo,monospace; }
+  dl { display:grid; gap:6px; margin:10px 0 0; } dl>div { display:grid; grid-template-columns:62px 1fr; gap:8px; } dt { color:var(--muted); } dd { margin:0; }
+  .sources { margin-top:9px; color:var(--muted); font-size:11px; } .sources a { color:#55715f; text-decoration:none; border-bottom:1px dotted #91a398; }
+  .sources a:hover { color:var(--green); }
+  table { width:100%; border-collapse:collapse; overflow:hidden; border-radius:10px; background:var(--paper); font-size:13px; }
+  th,td { padding:9px 11px; border-bottom:1px solid #edf0ed; text-align:left; vertical-align:top; } th { color:var(--muted); font-size:11px; font-weight:600; }
+  td small { display:block; color:var(--muted); } .badge { display:inline-block; padding:2px 7px; border-radius:99px; background:#eef0ee; color:#5f6964; font-size:10px; }
+  .stats { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px; } .stat { min-width:84px; }
+  ul.top { display:grid; gap:10px; margin:0; padding:0; list-style:none; } ul.top li { display:grid; grid-template-columns:26px 1fr; }
+  .dir { font-size:18px; font-weight:800; } .reason { color:var(--muted); font-size:12px; }
+  .chips { display:flex; gap:6px; flex-wrap:wrap; margin-top:10px; } .chip { padding:4px 8px; border-radius:7px; background:#ecefeb; color:#58625d; font-size:11px; }
+  .tension-card p { margin-bottom:5px; }
+  .regime { padding:17px 18px; border:1px solid #d9d3c2; border-radius:12px; background:#fffdf7; } .regime ul { margin:8px 0 0; padding-left:20px; }
+  .theme-head { display:flex; justify-content:space-between; gap:10px; } .theme-head span { color:var(--blue); font-size:12px; } .theme-count { color:var(--muted); font-size:11px; }
+  .institution-row { padding:12px 0; border-bottom:1px solid var(--line); } .institution-row p { margin:4px 0 0; }
+  .reported { opacity:.72; } .portfolio-gap { padding:12px 14px; border:1px dashed #c8b98f; border-radius:10px; color:#6b6042; background:#fffdf7; }
+  .up { color:var(--green)!important; } .down { color:var(--red)!important; } .warn,.mix { color:var(--amber)!important; } .flat,.muted { color:var(--muted)!important; }
+  .empty { color:var(--muted); } footer { margin-top:42px; color:#9aa39e; font-size:11px; }
+  @media(max-width:780px) { .page { padding:22px 14px 56px; } h1 { font-size:26px; } .grid,.grid.three { grid-template-columns:1fr; } .metrics { grid-template-columns:repeat(3,1fr); } .table-wrap { overflow-x:auto; } }
+  @media(max-width:460px) { .metrics { grid-template-columns:repeat(2,1fr); } dl>div { grid-template-columns:54px 1fr; } }
+</style>
+</head>
+<body><main class="page">
+  <header>
+    <div class="topline"><span>每日决策看板</span><span>·</span><span>报告 2026-07-19</span><span>·</span>
+      <span>数据截至 2026-07-18</span><span>·</span><span>7日覆盖 4/7</span>
+      <span>·</span><span>Run 2</span><span class="status warning">! warning</span></div>
+    <h1>存储基本面再获美银 +21% 上修，但 BofA 牛熊 9.6 触发卖出信号；下周 GOOG/TSLA capex 成胜负手</h1><p class="lead">北美交易台周度包带来三组对冲信息：① 美银渠道调研确认 3Q DRAM ASP 环比 +21%（远超 TrendForce），SemiAnalysis 反驳 KDA 利空论，存储与 NVDA 基本面证据继续加固；② 价格端 SOX 创 2025/4 以来最差周、SNDK 周 -29%，高盛判断动量平仓进入后期，但 BofA 牛熊指标 9.6 维持卖出信号、韩国央行加息收紧投机市场条件；③ Anthropic 约 $100 亿租用 Meta 算力 + Meta 2026 capex 或 $1450 亿，需求侧仍强。下周三 GOOG/TSLA 财报 capex 指引是多空共同等待的验证窗口。</p>
+    <div class="health-strip">
+        <div class="health-item warning">
+          <span class="health-icon">!</span>
+          <span><b>资料处理</b><small>6/7 已处理，1 篇待复核（打招呼测试消息）</small></span>
+        </div>
+        <div class="health-item warning">
+          <span class="health-icon">!</span>
+          <span><b>标的归一</b><small>GOOGL 已建档；IBM 尚无独立标的档案（仅 low 信号，暂留 _其他提及）</small></span>
+        </div>
+        <div class="health-item pass">
+          <span class="health-icon">✓</span>
+          <span><b>信号对账</b><small>65 = 40↑ + 17↓ + 8·</small></span>
+        </div>
+        <div class="health-item pass">
+          <span class="health-icon">✓</span>
+          <span><b>来源链接</b><small>全部可追溯</small></span>
+        </div>
+        <div class="health-item pass">
+          <span class="health-icon">✓</span>
+          <span><b>标的索引</b><small>28/28 个标的已入索引</small></span>
+        </div>
+        <div class="health-item pass">
+          <span class="health-icon">✓</span>
+          <span><b>走势图</b><small>23/23 已刷新</small></span>
+        </div>
+        <div class="health-item warning">
+          <span class="health-icon">!</span>
+          <span><b>7日覆盖</b><small>4/7 个日期有信号</small></span>
+        </div></div>
+  </header>
+
+  <section><h2>本次变化</h2><div class="metrics"><div class="metric"><b>19</b><span>新增信号</span></div><div class="metric"><b>1</b><span>处理笔记</span></div><div class="metric"><b></b><span>重复资料</span></div><div class="metric"><b>3</b><span>新建标的</span></div><div class="metric"><b>3</b><span>新建机构</span></div><div class="metric"><b></b><span>待复核</span></div></div><p class="note">与上一日快照 dashboard-2026-07-18.json 对比；信号增量由稳定 ID 机械计算。</p><div class="grid three" style="margin-top:12px">
+        <article class="change-card fundamental_upgrade">
+          <div class="eyebrow"><span class="priority high">高</span>fundamental_upgrade</div>
+          <h3>美银：3Q DRAM ASP 环比 +21%，远超 TrendForce（8-13%）</h3>
+          <p>服务器 DRAM/LPDDR5 +20-30%；现货连涨 8 周、OEM 急单；HBM4 订单取代 HBM3e 增多；NAND 3Q 望 +10%+。中国 6 月 IC 进口 +72%、5 月存储进口 +249%；台湾 6 月南亚 +621%/创见 +382%/群联 +301%。海力士/三星/美光获第三家独立机构同向确认。</p>
+          <div class="sources">来源：<a href="../../%E6%BA%90%E7%AC%94%E8%AE%B0/2026-07-18/01-%E5%8C%97%E7%BE%8E%E4%BA%A4%E6%98%93%E5%8F%B0-18003237.md">美银存储周报</a></div>
+        </article>
+        <article class="change-card risk">
+          <div class="eyebrow"><span class="priority high">高</span>risk</div>
+          <h3>BofA 牛熊指标 9.6 触发卖出信号 + 韩国央行加息</h3>
+          <p>极端看牛 = 撤退/轮动久期防御高股息美元；但科技基金 3 周创纪录流入 $48.8bn、半导体 ETF 年内 $46bn——价格 unwind 而仓位未 unwind。韩国央行 2023 年来首次加息至 2.75%，投机市场条件收紧。</p>
+          <div class="sources">来源：<a href="../../%E6%BA%90%E7%AC%94%E8%AE%B0/2026-07-18/01-%E5%8C%97%E7%BE%8E%E4%BA%A4%E6%98%93%E5%8F%B0-18003237.md">BofA Flow Show</a></div>
+        </article>
+        <article class="change-card capex_evidence">
+          <div class="eyebrow"><span class="priority high">高</span>capex_evidence</div>
+          <h3>Anthropic 洽谈约 $100 亿租用 Meta 算力；Meta 2026 capex 或 $1450 亿</h3>
+          <p>继 SpaceX Colossus 后又一算力大单；Dave Brown 加盟 Meta 确认；Meta 从自用 capex 走向对外云服务，需求侧叙事强化。</p>
+          <div class="sources">来源：<a href="../../%E6%BA%90%E7%AC%94%E8%AE%B0/2026-07-18/01-%E5%8C%97%E7%BE%8E%E4%BA%A4%E6%98%93%E5%8F%B0-18003237.md">CNBC</a></div>
+        </article>
+        <article class="change-card narrative_shift">
+          <div class="eyebrow"><span class="priority medium">中</span>narrative_shift</div>
+          <h3>SemiAnalysis：KDA 对 NVDA/HBM/DRAM 实则利好</h3>
+          <p>K3 超 2.8T 参数需 ≥64 芯片 scale-up；WideEP 消耗巨大带宽（NVL72 铜背板 18x DGX）；KV cache 卸载 DDR5/NVMe；Jevons 悖论——提效带来更多算力需求。直接反驳本周存储/NVDA 抛售的空头叙事之一。</p>
+          <div class="sources">来源：<a href="../../%E6%BA%90%E7%AC%94%E8%AE%B0/2026-07-18/01-%E5%8C%97%E7%BE%8E%E4%BA%A4%E6%98%93%E5%8F%B0-18003237.md">SemiAnalysis 长帖</a></div>
+        </article>
+        <article class="change-card regulation">
+          <div class="eyebrow"><span class="priority medium">中</span>regulation</div>
+          <h3>美拟设 FINRA 式 AI 监管机构（向 SEC 报告）</h3>
+          <p>Bessent 参与制定、Wiles 审阅；K3 引发抛售后政策加速；Hassabis 下周赴华盛顿游说。对 Anthropic/OpenAI 是确定性改善，对中国模型是地缘风险升级信号。</p>
+          <div class="sources">来源：<a href="../../%E6%BA%90%E7%AC%94%E8%AE%B0/2026-07-18/01-%E5%8C%97%E7%BE%8E%E4%BA%A4%E6%98%93%E5%8F%B0-18003237.md">Bloomberg</a></div>
+        </article></div></section>
+  <section><h2>需要你决定（2）</h2><div class="grid three">
+        <article class="decision-card">
+          <div class="eyebrow"><span class="priority high">高</span>需要决定</div>
+          <h3>下周 capex 验证窗口（7/22 GOOG/TSLA、7/29 META）前，是否需要预先制定应对预案？</h3>
+          <p>BofA：61% 基金经理认为 capex 不削减 → 削减即最大黑天鹅；MAGS &lt;$65 = 广泛回调、&gt;$70 = 加仓信号。高盛：动量平仓进入后期。多空证据都已就位，触发条件明确。</p>
+          <div class="action"><b>可选动作</b>确认是否按 MAGS 65/70 与 capex 指引预设加减仓/对冲规则，或仅观察。</div>
+          <div class="sources">来源：<a href="../../%E6%BA%90%E7%AC%94%E8%AE%B0/2026-07-18/01-%E5%8C%97%E7%BE%8E%E4%BA%A4%E6%98%93%E5%8F%B0-18003237.md">BofA Flow Show</a> · <a href="../../%E6%95%B4%E7%90%86/%E4%B8%BB%E9%A2%98/AI%E7%AE%97%E5%8A%9BCapex-GPUaaS%E8%9E%8D%E8%B5%84.md">AI算力Capex 主题</a></div>
+        </article>
+        <article class="decision-card">
+          <div class="eyebrow"><span class="priority low">低</span>需要决定</div>
+          <h3>是否永久跳过测试消息？</h3>
+          <p>源笔记 2026-07-15/01 仅为打招呼，没有投资内容（第 2 次提示）。</p>
+          <div class="action"><b>可选动作</b>确认后移入 permanently_skipped 集合。</div>
+          <div class="sources">来源：<a href="../../%E6%95%B4%E7%90%86/%E8%BF%9B%E5%BA%A6.md">运行待决策项</a></div>
+        </article></div></section>
+
+  <section><h2>重点机会与高风险</h2><div class="grid"><div>
+        <article class="card opportunity">
+          <div class="eyebrow up">重点机会 · 2026-07-18 升级</div>
+          <h3>中际旭创 <span class="ticker">300308.SZ</span></h3>
+          <dl>
+            <div><dt>触发</dt><dd>单日3家外资行（大摩/花旗/高盛）high置信度同向上调</dd></div>
+            <div><dt>核心数字</dt><dd>大摩上调26/27净利33%/180%；花旗上调26-28净利225%/178%/71%；高盛目标价2581元；1Q26营收+192%</dd></div>
+            <div><dt>风险</dt><dd class="warn">H股IPO定价与摊薄；CPO替代节奏；高预期下的估值消化；BofA 提示 capex 削减是当前最大预期差</dd></div>
+            <div><dt>验证项</dt><dd>跟踪 7/22 GOOG/TSLA、7/29 META capex 指引；H股定价；800G/1.6T 出货与 CPO 商用时间点</dd></div>
+          </dl>
+          <div class="sources">来源：<a href="../../%E6%95%B4%E7%90%86/%E6%A0%87%E7%9A%84/%E4%B8%AD%E9%99%85%E6%97%AD%E5%88%9B-300308.md">标的档案</a> · <a href="../../%E6%BA%90%E7%AC%94%E8%AE%B0/2026-07-17/03-%E4%BD%86%E5%AE%9E%E9%99%85%E4%BA%BA%E5%BD%A2%E6%9C%BA%E5%99%A8%E4%BA%BA%E4%B9%9F%E5%8D%96%E4%B8%8D%E5%87%BA%E5%A4%9A%E5%B0%91%E5%8F%B0.md">大摩/花旗</a> · <a href="../../%E6%BA%90%E7%AC%94%E8%AE%B0/2026-07-17/04-%E7%A7%91%E6%8A%80%E6%97%A5%E6%8A%A5-18003229.md">高盛</a></div>
+        </article></div><div>
+        <article class="card risk-card">
+          <div class="eyebrow down">Critical Watch · high</div>
+          <h3>下周 capex 验证窗口（GOOG/TSLA 7/22、META 7/29、AMZN 窗口）</h3>
+          <dl>
+            <div><dt>风险</dt><dd>BofA：hyperscaler FCF 2027 转负、Oracle CDS 与 IG 科技债利差回升；61% 基金经理押注 capex 不削减——若指引下修将同时打击 Mag7 与半导体链，并波及 shortlisted 的中际旭创。</dd></div>
+            <div><dt>反证</dt><dd>Anthropic 约 $100 亿租 Meta 算力、Meta 2026 capex 或 $1450 亿、TSM capex $60-64B，需求侧证据仍强；高盛判断动量平仓已进入后期。</dd></div>
+            <div><dt>观察</dt><dd>GOOG/TSLA 周三 capex 指引与云收入；MAGS 是否跌破 $65 或站上 $70；AMD AI 活动（7/22-23）。</dd></div>
+          </dl>
+          <div class="sources">来源：<a href="../../%E6%BA%90%E7%AC%94%E8%AE%B0/2026-07-18/01-%E5%8C%97%E7%BE%8E%E4%BA%A4%E6%98%93%E5%8F%B0-18003237.md">BofA Flow Show</a> · <a href="../../%E6%BA%90%E7%AC%94%E8%AE%B0/2026-07-18/01-%E5%8C%97%E7%BE%8E%E4%BA%A4%E6%98%93%E5%8F%B0-18003237.md">GS 周报</a></div>
+        </article>
+        <article class="card risk-card">
+          <div class="eyebrow down">Critical Watch · high</div>
+          <h3>CXMT长鑫 / YMTC长江存储</h3>
+          <dl>
+            <div><dt>风险</dt><dd>美国议员推动禁止美企采购相关存储芯片，苹果亦被点名；监管结果可能直接冲击订单兑现。</dd></div>
+            <div><dt>反证</dt><dd>CXMT同时出现212倍IPO认购、订单排至2027和DRAM涨价信号；美银 3Q DRAM ASP +21% 进一步加固行业基本面。</dd></div>
+            <div><dt>观察</dt><dd>法案或行政限制是否落地、适用对象与生效时间、苹果供应链表态。</dd></div>
+          </dl>
+          <div class="sources">来源：<a href="../../%E6%BA%90%E7%AC%94%E8%AE%B0/2026-07-17/01-%E7%A7%91%E6%8A%80%E6%97%A5%E6%8A%A5-18003228.md">FT监管信号</a> · <a href="../../%E6%BA%90%E7%AC%94%E8%AE%B0/2026-07-17/04-%E7%A7%91%E6%8A%80%E6%97%A5%E6%8A%A5-18003229.md">产业信号</a></div>
+        </article>
+        <article class="card risk-card">
+          <div class="eyebrow down">Critical Watch · medium</div>
+          <h3>亚太AI存储与高动量科技股</h3>
+          <dl>
+            <div><dt>风险</dt><dd>SOX 创 2025/4 以来最差周，SNDK 周 -29.29%、MU -13.31%；BofA 牛熊 9.6 卖出信号 + 韩国央行加息，流动性环境继续收紧。</dd></div>
+            <div><dt>反证</dt><dd>高盛：动量平仓进入后期（幅度达标+仓位干净+投降迹象）；美银 +21% 上修基本面；科技基金 3 周创纪录流入。</dd></div>
+            <div><dt>观察</dt><dd>融资盘强平是否延续；SOX 能否在 200 日线（+33%）企稳；资金流入能否转化为价格企稳。</dd></div>
+          </dl>
+          <div class="sources">来源：<a href="../../%E6%BA%90%E7%AC%94%E8%AE%B0/2026-07-18/01-%E5%8C%97%E7%BE%8E%E4%BA%A4%E6%98%93%E5%8F%B0-18003237.md">GS 周报</a> · <a href="../../%E6%BA%90%E7%AC%94%E8%AE%B0/2026-07-18/01-%E5%8C%97%E7%BE%8E%E4%BA%A4%E6%98%93%E5%8F%B0-18003237.md">BofA Flow Show</a></div>
+        </article></div></div></section>
+
+  <section><h2>近期催化剂</h2><div class="table-wrap"><table><thead><tr><th>日期</th><th>类型</th><th>标的</th><th>观察项</th><th>状态</th></tr></thead><tbody>
+        <tr>
+          <td class="mono">2026-07-22</td>
+          <td><span class="badge">财报</span></td>
+          <td><b>GOOGL</b></td>
+          <td>capex 指引、GCP 增速（买方 +70-75%）、积压订单、Gemini 3.5 Pro 时间表<div class="sources">来源：<a href="../../%E6%BA%90%E7%AC%94%E8%AE%B0/2026-07-18/01-%E5%8C%97%E7%BE%8E%E4%BA%A4%E6%98%93%E5%8F%B0-18003237.md">GS 周报</a></div></td>
+          <td class="muted">待发布</td>
+        </tr>
+        <tr>
+          <td class="mono">2026-07-22</td>
+          <td><span class="badge">财报</span></td>
+          <td><b>TSLA</b></td>
+          <td>capex 指引（AI/机器人投入口径）<div class="sources">来源：<a href="../../%E6%BA%90%E7%AC%94%E8%AE%B0/2026-07-18/01-%E5%8C%97%E7%BE%8E%E4%BA%A4%E6%98%93%E5%8F%B0-18003237.md">GS 周报</a></div></td>
+          <td class="muted">待发布</td>
+        </tr>
+        <tr>
+          <td class="mono">2026-07-22 ~ 07-23</td>
+          <td><span class="badge">产品活动</span></td>
+          <td><b>AMD</b></td>
+          <td>Advancing AI 活动：新品与 AI 路线图<div class="sources">来源：<a href="../../%E6%BA%90%E7%AC%94%E8%AE%B0/2026-07-18/01-%E5%8C%97%E7%BE%8E%E4%BA%A4%E6%98%93%E5%8F%B0-18003237.md">GS 周报</a></div></td>
+          <td class="muted">待举办</td>
+        </tr>
+        <tr>
+          <td class="mono">2026-07-29</td>
+          <td><span class="badge">财报</span></td>
+          <td><b>META</b></td>
+          <td>2027 capex 口径；Anthropic 算力合作是否官宣；云业务计划<div class="sources">来源：<a href="../../%E6%95%B4%E7%90%86/%E6%A0%87%E7%9A%84/META.md">META 档案</a></div></td>
+          <td class="muted">待发布</td>
+        </tr>
+        <tr>
+          <td class="mono">2026-07-22起，具体日期待定</td>
+          <td><span class="badge">财报</span></td>
+          <td><b>AMZN</b></td>
+          <td>AWS 增速（bogey +35%）、capex 指引<div class="sources">来源：<a href="../../%E6%BA%90%E7%AC%94%E8%AE%B0/2026-07-17/01-%E7%A7%91%E6%8A%80%E6%97%A5%E6%8A%A5-18003228.md">财报前瞻</a></div></td>
+          <td class="muted">待确认日期</td>
+        </tr>
+        <tr>
+          <td class="mono">2026-07-29</td>
+          <td><span class="badge">宏观</span></td>
+          <td><b>FOMC</b></td>
+          <td>利率决议；本周六起进入静默期；BofA：83% 押注 11 月前不加息 vs CPI 趋势 3.9%<div class="sources">来源：<a href="../../%E6%BA%90%E7%AC%94%E8%AE%B0/2026-07-18/01-%E5%8C%97%E7%BE%8E%E4%BA%A4%E6%98%93%E5%8F%B0-18003237.md">GS 周报 / Flow Show</a></div></td>
+          <td class="muted">待公布</td>
+        </tr>
+        <tr>
+          <td class="mono">日期待定</td>
+          <td><span class="badge">IPO</span></td>
+          <td><b>中际旭创H股</b></td>
+          <td>定价、募资额、摊薄与A/H价差<div class="sources">来源：<a href="../../%E6%BA%90%E7%AC%94%E8%AE%B0/2026-07-17/03-%E4%BD%86%E5%AE%9E%E9%99%85%E4%BA%BA%E5%BD%A2%E6%9C%BA%E5%99%A8%E4%BA%BA%E4%B9%9F%E5%8D%96%E4%B8%8D%E5%87%BA%E5%A4%9A%E5%B0%91%E5%8F%B0.md">H股IPO线索</a></div></td>
+          <td class="muted">编纂稿阶段</td>
+        </tr>
+        <tr>
+          <td class="mono">日期待定</td>
+          <td><span class="badge">监管</span></td>
+          <td><b>CXMT / YMTC；AI 行业</b></td>
+          <td>美采购限制是否落地；FINRA 式 AI 监管机构方案进展（Wiles 审阅 → Trump）<div class="sources">来源：<a href="../../%E6%BA%90%E7%AC%94%E8%AE%B0/2026-07-17/01-%E7%A7%91%E6%8A%80%E6%97%A5%E6%8A%A5-18003228.md">FT监管信号</a> · <a href="../../%E6%BA%90%E7%AC%94%E8%AE%B0/2026-07-18/01-%E5%8C%97%E7%BE%8E%E4%BA%A4%E6%98%93%E5%8F%B0-18003237.md">Bloomberg</a></div></td>
+          <td class="muted">提议阶段</td>
+        </tr></tbody></table></div></section>
+
+  <section><h2>近7日信号 <span class="muted">2026-07-13 至 2026-07-19</span></h2>
+    <div class="stats"><div class="stat"><b>65</b><span>总数</span></div>
+      <div class="stat"><b class="up">40</b><span>看多</span></div>
+      <div class="stat"><b class="down">17</b><span>看空</span></div>
+      <div class="stat"><b>8</b><span>中性</span></div>
+      <div class="stat"><b>6</b><span>最新日 2026-07-18</span></div>
+      <div class="stat"><b>4/7</b><span>日期覆盖</span></div></div>
+    <div class="grid"><div><h3>最值得关注</h3><ul class="top">
+        <li>
+          <span class="dir up">↑</span>
+          <div><b>SK海力士 / 三星 / 美光</b> · 美银：3Q DRAM ASP 环比 +21%（vs TrendForce 8-13%），服务器 DRAM +20-30%
+            <div class="reason">入选：第三家独立机构同向确认涨价周期，与周内股价暴跌形成极端背离 · high ×3</div>
+            <div class="sources">来源：<a href="../../%E6%BA%90%E7%AC%94%E8%AE%B0/2026-07-18/01-%E5%8C%97%E7%BE%8E%E4%BA%A4%E6%98%93%E5%8F%B0-18003237.md">美银存储周报</a></div>
+          </div>
+        </li>
+        <li>
+          <span class="dir up">↑</span>
+          <div><b>中际旭创 300308</b> · 大摩、花旗、高盛同日上调，目标价最高2581元
+            <div class="reason">入选：多机构独立共振并触发状态升级 · high ×3</div>
+            <div class="sources">来源：<a href="../../%E6%95%B4%E7%90%86/%E6%A0%87%E7%9A%84/%E4%B8%AD%E9%99%85%E6%97%AD%E5%88%9B-300308.md">标的档案</a></div>
+          </div>
+        </li>
+        <li>
+          <span class="dir up">↑</span>
+          <div><b>META / Anthropic</b> · 约 $100 亿算力租赁洽谈；Meta 2026 capex 或 $1450 亿
+            <div class="reason">入选：capex 主线需求侧新证据，云业务叙事升级 · medium</div>
+            <div class="sources">来源：<a href="../../%E6%BA%90%E7%AC%94%E8%AE%B0/2026-07-18/01-%E5%8C%97%E7%BE%8E%E4%BA%A4%E6%98%93%E5%8F%B0-18003237.md">CNBC</a></div>
+          </div>
+        </li>
+        <li>
+          <span class="dir mix">↕</span>
+          <div><b>英伟达 NVDA</b> · SemiAnalysis 反驳 KDA 利空论（scale-up+带宽需求）vs SOX 最差周
+            <div class="reason">入选：叙事级利好与动量级抛压并存，下周 capex 定方向 · medium/low</div>
+            <div class="sources">来源：<a href="../../%E6%BA%90%E7%AC%94%E8%AE%B0/2026-07-18/01-%E5%8C%97%E7%BE%8E%E4%BA%A4%E6%98%93%E5%8F%B0-18003237.md">SemiAnalysis 长帖</a></div>
+          </div>
+        </li>
+        <li>
+          <span class="dir mix">↕</span>
+          <div><b>CXMT长鑫</b> · 212倍认购、订单至2027，与美国禁令压力并存
+            <div class="reason">入选：同一标的高置信度多空冲突 · high</div>
+            <div class="sources">来源：<a href="../../%E6%BA%90%E7%AC%94%E8%AE%B0/2026-07-17/04-%E7%A7%91%E6%8A%80%E6%97%A5%E6%8A%A5-18003229.md">产业信号</a> · <a href="../../%E6%BA%90%E7%AC%94%E8%AE%B0/2026-07-17/01-%E7%A7%91%E6%8A%80%E6%97%A5%E6%8A%A5-18003228.md">监管风险</a></div>
+          </div>
+        </li></ul></div>
+      <div><h3>结构</h3><div class="chips"><span class="chip">Capex变化 <b>3</b></span><span class="chip">估值业绩调整 <b>15</b></span><span class="chip">供应链事件 <b>22</b></span><span class="chip">催化剂 <b>21</b></span><span class="chip">监管地缘 <b>4</b></span></div><div class="chips"><span class="chip">high <b>18</b></span><span class="chip">low <b>12</b></span><span class="chip">medium <b>35</b></span></div>
+        <p class="note">归因集中度：科技日报 17条/26% · Goldman Sachs 8条/12% · 美银 6条/9%。最大单篇源笔记 04-科技日报-18003229：20条/31%。这里统计信号表“机构”字段，不等同独立原始来源。</p></div></div>
+  </section>
+
+  <section><h2>冲突、背离与主题分化</h2><div class="grid three">
+        <article class="tension-card">
+          <div class="eyebrow">同标的冲突</div><h3>CXMT长鑫</h3>
+          <p class="up"><b>多：</b>IPO获212倍认购；订单排至2027；DRAM调价60%至翻倍</p>
+          <p class="down"><b>空：</b>美国议员推动禁止美企采购CXMT/YMTC芯片</p>
+          <div class="sources">来源：<a href="../../%E6%BA%90%E7%AC%94%E8%AE%B0/2026-07-17/04-%E7%A7%91%E6%8A%80%E6%97%A5%E6%8A%A5-18003229.md">正面信号</a> · <a href="../../%E6%BA%90%E7%AC%94%E8%AE%B0/2026-07-17/01-%E7%A7%91%E6%8A%80%E6%97%A5%E6%8A%A5-18003228.md">负面信号</a></div>
+        </article>
+        <article class="tension-card">
+          <div class="eyebrow">同标的冲突</div><h3>台积电 TSM</h3>
+          <p class="up"><b>多：</b>Q2与3Q指引超预期，FY26销售及capex上调</p>
+          <p class="down"><b>空：</b>财报后价格回落，3Q毛利率指引环比走弱</p>
+          <div class="sources">来源：<a href="../../%E6%BA%90%E7%AC%94%E8%AE%B0/2026-07-17/01-%E7%A7%91%E6%8A%80%E6%97%A5%E6%8A%A5-18003228.md">TSM财报信号</a></div>
+        </article>
+        <article class="tension-card">
+          <div class="eyebrow">同标的冲突</div><h3>SK海力士</h3>
+          <p class="up"><b>多：</b>美银 3Q ASP +21%、DIGITIMES 涨价、SemiAnalysis KDA 利好、崔泰源唱多</p>
+          <p class="down"><b>空：</b>存储股急跌并受去杠杆冲击</p>
+          <div class="sources">来源：<a href="../../%E6%BA%90%E7%AC%94%E8%AE%B0/2026-07-18/01-%E5%8C%97%E7%BE%8E%E4%BA%A4%E6%98%93%E5%8F%B0-18003237.md">美银/SemiAnalysis</a> · <a href="../../%E6%BA%90%E7%AC%94%E8%AE%B0/2026-07-17/01-%E7%A7%91%E6%8A%80%E6%97%A5%E6%8A%A5-18003228.md">7月16日信号</a></div>
+        </article>
+        <article class="tension-card">
+          <div class="eyebrow">同标的冲突</div><h3>三星电子</h3>
+          <p class="up"><b>多：</b>美银 3Q ASP +21%、DIGITIMES 涨价</p>
+          <p class="down"><b>空：</b>存储板块急跌</p>
+          <div class="sources">来源：<a href="../../%E6%BA%90%E7%AC%94%E8%AE%B0/2026-07-18/01-%E5%8C%97%E7%BE%8E%E4%BA%A4%E6%98%93%E5%8F%B0-18003237.md">美银存储周报</a> · <a href="../../%E6%BA%90%E7%AC%94%E8%AE%B0/2026-07-17/01-%E7%A7%91%E6%8A%80%E6%97%A5%E6%8A%A5-18003228.md">7月16日信号</a></div>
+        </article>
+        <article class="tension-card">
+          <div class="eyebrow">同标的冲突</div><h3>美光 MU</h3>
+          <p class="up"><b>多：</b>美银 3Q ASP +21%、DIGITIMES 涨价</p>
+          <p class="down"><b>空：</b>周 -13.31%（动量抛售）</p>
+          <div class="sources">来源：<a href="../../%E6%BA%90%E7%AC%94%E8%AE%B0/2026-07-18/01-%E5%8C%97%E7%BE%8E%E4%BA%A4%E6%98%93%E5%8F%B0-18003237.md">美银存储周报</a></div>
+        </article>
+        <article class="tension-card">
+          <div class="eyebrow">同标的冲突</div><h3>英伟达 NVDA</h3>
+          <p class="up"><b>多：</b>SemiAnalysis：KDA/WideEP 推升 scale-up 与带宽需求</p>
+          <p class="down"><b>空：</b>SOX 最差周、动量平仓，周 -3.86%</p>
+          <div class="sources">来源：<a href="../../%E6%BA%90%E7%AC%94%E8%AE%B0/2026-07-18/01-%E5%8C%97%E7%BE%8E%E4%BA%A4%E6%98%93%E5%8F%B0-18003237.md">SemiAnalysis 长帖</a></div>
+        </article>
+        <article class="tension-card">
+          <div class="eyebrow">基本面—价格背离（较上周加深）</div><h3>SK海力士 / 三星 / 美光 / SNDK / 铠侠</h3>
+          <p><b>基本面：</b>美银 3Q DRAM ASP +21%、现货连涨 8 周、中国 6 月 IC 进口 +72%、台湾 6 月营收暴增</p>
+          <p><b>价格：</b>SNDK 周 -29.29%、MU -13.31%、WDC -18.09%、铠侠强平</p>
+        </article>
+        <article class="tension-card">
+          <div class="eyebrow">资金流入—价格行为背离（价格 unwind 但仓位未 unwind）</div><h3>美股科技板块</h3>
+          <p><b>基本面：</b>科技基金 3 周创纪录流入 $48.8bn、半导体 ETF 年内 $46bn（31% AUM）</p>
+          <p><b>价格：</b>SOX 创 2025/4 以来最差周、SOXL 自高点 -55%</p>
+        </article>
+        <article class="tension-card">
+          <div class="eyebrow">财报—价格反应背离</div><h3>台积电 TSM</h3>
+          <p><b>基本面：</b>Q2及3Q指引超预期，FY26销售和capex上调</p>
+          <p><b>价格：</b>利好后股价回落，3Q毛利率指引环比走弱</p>
+        </article>
+        <article class="tension-card">
+          <div class="eyebrow">同主题分化</div><h3>AI光模块</h3>
+          <p class="up"><b>正面：</b>中际旭创获三家机构上调；LITE受益InP短缺</p>
+          <p class="down"><b>负面：</b>GLW因估值被JPM列入负面催化剂观察</p>
+        </article>
+        <article class="tension-card">
+          <div class="eyebrow">同主题分化</div><h3>美股 AI 内部（高低切换）</h3>
+          <p class="up"><b>正面：</b>AAPL +5.84%、MSFT +2.26%、AMZN +0.77%、CRWD +9%/PANW +10%</p>
+          <p class="down"><b>负面：</b>半导体全线：SNDK -29.29%、MRVL -19.99%、MU -13.31%、INTC -13.47%</p>
+        </article></div></section>
+
+  <section><h2>市场环境</h2><div class="regime"><div class="eyebrow">Agent synthesis · 基本面再上修 × 动量平仓后期 × 极端情绪反向警示</div><p>Agent synthesis：基本面证据继续加固（美银 3Q DRAM ASP +21%、Anthropic-Meta $100 亿算力洽谈、SemiAnalysis 带宽论证）；价格端 SOX 创 2025/4 最差周但高盛判断平仓进入后期、投降迹象出现；情绪端 BofA 牛熊 9.6 维持卖出信号、韩国央行加息收紧投机条件。三者并置的含义：仓位出清接近尾段但宏观流动性转向收紧，下周 capex 财报是方向确认点，不宜在确认前把背离单边解读为抄底信号。</p><ul><li>SOX 创 2025 年 4 月以来最差周度，自 6 月高点跑输大盘约 20pts</li><li>GSPRHIMO 18 天 -32%；动量敞口降至 1 年 77 分位（高盛：平仓后期）</li><li>BofA 牛熊指标 9.6（极度看牛→卖出信号）；科技基金 3 周创纪录流入 $48.8bn</li><li>韩国央行加息 25bp 至 2.75%（2023 年来首次）</li><li>美银：3Q DRAM ASP +21%；中国 6 月 IC 进口 +72% YoY</li></ul><div class="sources">来源：<a href="../../%E6%95%B4%E7%90%86/%E5%AE%8F%E8%A7%82.md">宏观时间线</a> · <a href="../../%E6%BA%90%E7%AC%94%E8%AE%B0/2026-07-18/01-%E5%8C%97%E7%BE%8E%E4%BA%A4%E6%98%93%E5%8F%B0-18003237.md">北美交易台周度包</a></div></div></section>
+
+  <section><h2>主题雷达</h2><p class="note">主题可重叠，信号数不可横向求和。</p><div class="grid">
+        <article class="theme-card">
+          <div class="theme-head"><h3>AI存储</h3><span>基本面共识加固、价格极端背离</span></div>
+          <p class="theme-count">28条（非互斥） · ↑17 / ↓9 / ·2</p>
+          <p>美银 3Q DRAM ASP +21%（第三家机构同向）+ SemiAnalysis KDA 利好 + 中国/台湾进口营收数据爆表；但 SNDK 周 -29.29%、MU -13.31%。</p>
+          <p class="muted"><b>标的：</b>SK海力士、三星、美光、SNDK、铠侠、CXMT</p>
+          <p class="warn"><b>风险：</b>韩国加息收紧流动性、强平延续、美禁令、capex 下修</p>
+          <div class="sources">来源：<a href="../../%E6%95%B4%E7%90%86/%E4%B8%BB%E9%A2%98/AI%E5%AD%98%E5%82%A8-DRAM-HBM-%E6%B6%A8%E4%BB%B7%E4%B8%8E%E5%8E%BB%E6%9D%A0%E6%9D%86.md">主题档案</a></div>
+        </article>
+        <article class="theme-card">
+          <div class="theme-head"><h3>AI算力Capex</h3><span>需求侧仍强、下周进入验证窗口</span></div>
+          <p class="theme-count">12条（非互斥） · ↑8 / ↓1 / ·3</p>
+          <p>Anthropic 约 $100 亿租 Meta 算力、Meta 2026 capex 或 $1450 亿、TSM $60-64B；BofA 空头框架（FCF 转负、CDS 回升、61% 不削减=预期差）同步成形。</p>
+          <p class="muted"><b>标的：</b>META、Anthropic、GOOGL、AMZN、TSM、NVDA、NBIS</p>
+          <p class="warn"><b>风险：</b>7/22 GOOG/TSLA capex 指引下修、MAGS 跌破 $65</p>
+          <div class="sources">来源：<a href="../../%E6%95%B4%E7%90%86/%E4%B8%BB%E9%A2%98/AI%E7%AE%97%E5%8A%9BCapex-GPUaaS%E8%9E%8D%E8%B5%84.md">主题档案</a></div>
+        </article>
+        <article class="theme-card">
+          <div class="theme-head"><h3>亚太动量平仓</h3><span>平仓后期但流动性转向收紧</span></div>
+          <p class="theme-count">14条（非互斥） · ↑2 / ↓10 / ·2</p>
+          <p>高盛：幅度/仓位/投降三条件指向后期；BofA：牛熊 9.6 卖出信号 + 韩国央行加息，价格 unwind 而仓位未 unwind。</p>
+          <p class="muted"><b>标的：</b>铠侠、中芯国际、海力士、三星、NVDA、MU、SNDK</p>
+          <p class="warn"><b>风险：</b>强平连锁未结束、宏观叠加（FOMC 7/29、ECB 7/23）</p>
+          <div class="sources">来源：<a href="../../%E6%95%B4%E7%90%86/%E4%B8%BB%E9%A2%98/%E4%BA%9A%E5%A4%AA%E5%8A%A8%E9%87%8F%E5%B9%B3%E4%BB%93-%E5%8E%BB%E6%9D%A0%E6%9D%86.md">主题档案</a></div>
+        </article>
+        <article class="theme-card">
+          <div class="theme-head"><h3>开源大模型竞争</h3><span>竞争与监管同步升级</span></div>
+          <p class="theme-count">10条（非互斥） · ↑5 / ↓2 / ·3</p>
+          <p>SemiAnalysis 为 K3 算力需求正名；马斯克 xAI 2T 下周完成初训叫阵；Claude Fable 5 扩量；美 FINRA 式监管方案加速（K3 抛售是直接背景）。</p>
+          <p class="muted"><b>标的：</b>Kimi-Moonshot、Anthropic、xAI、Minimax</p>
+          <p class="warn"><b>风险：</b>美监管针对中国模型的限制条款、编程高价领域格局未变</p>
+          <div class="sources">来源：<a href="../../%E6%95%B4%E7%90%86/%E4%B8%BB%E9%A2%98/%E5%BC%80%E6%BA%90%E5%A4%A7%E6%A8%A1%E5%9E%8B-KimiK3-%E7%AB%9E%E4%BA%89%E6%A0%BC%E5%B1%80.md">主题档案</a></div>
+        </article></div></section>
+
+  <section><h2>共识强度</h2><div class="table-wrap"><table><thead><tr><th>标的</th><th>方向</th><th>信号</th><th>High</th><th>机构</th><th>源笔记</th><th>解读</th></tr></thead><tbody>
+        <tr><td><b>中际旭创</b><small>A股上市；H股IPO推进中</small></td>
+          <td>↑</td><td>4</td>
+          <td>3</td><td>4</td>
+          <td>2</td><td>多机构共振</td></tr>
+        <tr><td><b>DRAM 链（SK海力士/三星/美光）</b><small>均上市；注意韩股去杠杆与韩国央行加息的流动性压制</small></td>
+          <td>↑（基本面）</td><td>9</td>
+          <td>3</td><td>3</td>
+          <td>3</td><td>DIGITIMES、美银、SemiAnalysis 三家独立同向；但价格端高置信度 ↓ 并存，属基本面共识而非价格共识</td></tr>
+        <tr><td><b>ASML</b><small>上市</small></td>
+          <td>↑</td><td>4</td>
+          <td>2</td><td>2</td>
+          <td>2</td><td>财报（科技日报转述）+ 美银交叉确认，证据质量提升</td></tr>
+        <tr><td><b>CXMT长鑫</b><small>未上市，当前主要是产业链与IPO观察</small></td>
+          <td>mixed</td><td>4</td>
+          <td>3</td><td>3</td>
+          <td>2</td><td>高置信度冲突</td></tr></tbody></table></div></section>
+
+  <section><h2>机构动作</h2><div>
+        <article class="institution-row"><div><b>美银 BofA</b>
+          <span class="badge">存储上修 + 大盘卖出信号（双报告）</span></div>
+          <p><b>DRAM 链 / 美股大盘</b> · Global Memory Tech：3Q DRAM ASP +21% 远超 TrendForce；Flow Show：牛熊 9.6 维持卖出信号，科技基金创纪录流入与价格下跌并存。</p>
+          <div class="sources">来源：<a href="../../%E6%95%B4%E7%90%86/%E6%9C%BA%E6%9E%84/%E7%BE%8E%E9%93%B6-BofA.md">机构档案</a></div></article>
+        <article class="institution-row"><div><b>SemiAnalysis</b>
+          <span class="badge">反驳空头叙事</span></div>
+          <p><b>NVDA / HBM / DRAM / 网络</b> · 8 帖长文论证 K3 的 KDA 实则推升 scale-up 域与带宽需求，Jevons 悖论下需要更多算力而非更少。</p>
+          <div class="sources">来源：<a href="../../%E6%95%B4%E7%90%86/%E6%9C%BA%E6%9E%84/SemiAnalysis.md">机构档案</a></div></article>
+        <article class="institution-row"><div><b>CNBC</b>
+          <span class="badge">需求侧独家</span></div>
+          <p><b>Anthropic / META</b> · Anthropic 与 Meta 初步洽谈约 $100 亿算力租赁；Dave Brown 加盟 Meta 确认。</p>
+          <div class="sources">来源：<a href="../../%E6%95%B4%E7%90%86/%E6%9C%BA%E6%9E%84/CNBC.md">机构档案</a></div></article>
+        <article class="institution-row"><div><b>Goldman Sachs</b>
+          <span class="badge">周期判断</span></div>
+          <p><b>美股动量 / SOX</b> · US Weekly：动量平仓进入后期（幅度达标+仓位干净+无基本面催化），部分投降迹象出现；下周 all eyes on GOOG。</p>
+          <div class="sources">来源：<a href="../../%E6%95%B4%E7%90%86/%E6%9C%BA%E6%9E%84/Goldman%20Sachs-%E9%AB%98%E7%9B%9B.md">机构档案</a></div></article>
+        <article class="institution-row"><div><b>Morgan Stanley / 花旗 / Goldman Sachs</b>
+          <span class="badge">同向上调（维持）</span></div>
+          <p><b>中际旭创</b> · 三家外资行同日大幅上调盈利预测或目标价，构成当前最强机构共振。</p>
+          <div class="sources">来源：<a href="../../%E6%95%B4%E7%90%86/%E6%A0%87%E7%9A%84/%E4%B8%AD%E9%99%85%E6%97%AD%E5%88%9B-300308.md">机构观点时间线</a></div></article></div></section>
+
+  <section><h2>财报季跟踪 <span class="muted">2026 Q2 美股财报季</span></h2><p class="note">北美 CSP capex 主线的证实/证伪窗口，直接关联中际旭创及 AI 硬件主题；下周 18% 标普市值发布财报。</p><div class="grid">
+        <article class="card earnings-card ">
+          <div class="eyebrow">2026-07-22</div>
+          <h3>谷歌 <span class="ticker">GOOGL</span>
+            <span class="badge">待发布</span></h3>
+          <dl>
+            <div><dt>预期</dt><dd>买方预期 GCP +70-75%（街 +64%），gauge 8/10</dd></div>
+            <div><dt>看点</dt><dd>capex 指引；云收入增速与利润率；积压订单；Gemini 3.5 Pro 推迟是否确认</dd></div>
+            
+            
+          </dl>
+          <div class="sources">来源：<a href="../../%E6%BA%90%E7%AC%94%E8%AE%B0/2026-07-18/01-%E5%8C%97%E7%BE%8E%E4%BA%A4%E6%98%93%E5%8F%B0-18003237.md">GS 周报</a> · <a href="../../%E6%BA%90%E7%AC%94%E8%AE%B0/2026-07-17/01-%E7%A7%91%E6%8A%80%E6%97%A5%E6%8A%A5-18003228.md">财报前瞻</a></div>
+        </article>
+        <article class="card earnings-card ">
+          <div class="eyebrow">2026-07-22</div>
+          <h3>特斯拉 <span class="ticker">TSLA</span>
+            <span class="badge">待发布</span></h3>
+          <dl>
+            <div><dt>预期</dt><dd>源笔记暂无买方预期数字</dd></div>
+            <div><dt>看点</dt><dd>capex 指引（高盛列为下周 hyperscaler 焦点之一）</dd></div>
+            
+            
+          </dl>
+          <div class="sources">来源：<a href="../../%E6%BA%90%E7%AC%94%E8%AE%B0/2026-07-18/01-%E5%8C%97%E7%BE%8E%E4%BA%A4%E6%98%93%E5%8F%B0-18003237.md">GS 周报</a></div>
+        </article>
+        <article class="card earnings-card ">
+          <div class="eyebrow">2026-07-29</div>
+          <h3>Meta <span class="ticker">META</span>
+            <span class="badge">待发布</span></h3>
+          <dl>
+            <div><dt>预期</dt><dd>买方预期Q2营收$61.5B（+28% FXN）；gauge 7/10</dd></div>
+            <div><dt>看点</dt><dd>2027 capex 口径；Anthropic 算力合作；云业务计划</dd></div>
+            
+            
+          </dl>
+          <div class="sources">来源：<a href="../../%E6%BA%90%E7%AC%94%E8%AE%B0/2026-07-17/04-%E7%A7%91%E6%8A%80%E6%97%A5%E6%8A%A5-18003229.md">META财报线索</a></div>
+        </article>
+        <article class="card earnings-card ">
+          <div class="eyebrow">日期待定（7/22起）</div>
+          <h3>亚马逊 <span class="ticker">AMZN</span>
+            <span class="badge">待发布</span></h3>
+          <dl>
+            <div><dt>预期</dt><dd>买方预期AWS +35%、Q2经营利润$25B+、Q3营收指引$200-205B；投资者预期gauge 8/10</dd></div>
+            <div><dt>看点</dt><dd>AWS增速是否达到35%；capex指引与买方预期差</dd></div>
+            
+            
+          </dl>
+          <div class="sources">来源：<a href="../../%E6%BA%90%E7%AC%94%E8%AE%B0/2026-07-17/01-%E7%A7%91%E6%8A%80%E6%97%A5%E6%8A%A5-18003228.md">财报前瞻</a></div>
+        </article>
+        <article class="card earnings-card reported">
+          <div class="eyebrow">2026-07-17</div>
+          <h3>奈飞 <span class="ticker">NFLX</span>
+            <span class="badge">已发布</span></h3>
+          <dl>
+            <div><dt>预期</dt><dd>买方预期gauge 5/10</dd></div>
+            
+            <div><dt>实际</dt><dd>7/16 盘后发布（细节未入源）</dd></div>
+            <div><dt>反应</dt><dd class="down">盘后 -3%；次日 -7.26%，周 -6.02%</dd></div>
+          </dl>
+          <div class="sources">来源：<a href="../../%E6%BA%90%E7%AC%94%E8%AE%B0/2026-07-17/04-%E7%A7%91%E6%8A%80%E6%97%A5%E6%8A%A5-18003229.md">市场反应</a> · <a href="../../%E6%BA%90%E7%AC%94%E8%AE%B0/2026-07-18/01-%E5%8C%97%E7%BE%8E%E4%BA%A4%E6%98%93%E5%8F%B0-18003237.md">周度热力图</a></div>
+        </article></div></section>
+
+  <section><h2>组合信息边界</h2><div class="portfolio-gap">当前尚无 held 标的和投资决策记录，因此看板无法计算持仓暴露、盈亏、仓位集中度或信号对组合的影响。</div></section>
+
+  <section><h2>Stale观察（0）</h2>
+    <p class="empty">全部标的为7月新建档，体系运行未满60天，暂无stale标的。</p>
+  </section>
+
+  <footer>来源：整理/索引/dashboard.json · Dashboard v2 · 机械统计由 validate_dashboard.py 对账 · 渲染于 2026-07-19 06:17</footer>
+</main></body></html>
